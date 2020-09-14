@@ -5,4 +5,4 @@ python:
 install:
   - pip install -e .[development]
 script:
-  - python tests/test_scraper.py
+  - python tests/test_package.py
