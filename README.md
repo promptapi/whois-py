@@ -23,7 +23,58 @@ $ pip install pa-whois
 
 ## Example Usage
 
-@wip
+Let’s try with `check` endpoint:
+
+```python
+from whois import Whois
+
+who = Whois()
+who.check('promptapi.com')
+# returns dict
+# {'result': 'registered', 'status': 200}
+
+# or
+check_result = who.check('promptapi.com')
+print(check_result)
+# {'result': 'registered', 'status': 200}
+
+who.check('promptapi.comaaaaaaaaaaaaaaaa')
+# {'error': 'TLD not supported', 'status': 400}
+
+who.check('promptapi-testing-domain.com') 
+# {'result': 'available', 'status': 200}
+```
+
+Now, let’s try with `query` endpoint:
+
+```python
+from whois import Whois
+
+who = Whois()
+who.query('promptapi-testing-domain.com')
+# {'error': 'No match for promptapi-testing-domain.com', 'status': 404}
+
+who.query('promptapi.com')
+#{'result': {'domain_name': 'PROMPTAPI.COM',
+#  'registrar': 'NameCheap, Inc.',
+#  'whois_server': 'whois.namecheap.com',
+#  'referral_url': None,
+#  'updated_date': '2020-05-27 22:19:36',
+#  'creation_date': '2020-04-19 15:11:52',
+#  'expiration_date': '2021-04-19 15:11:52',
+#  'name_servers': ['APOLLO.NS.CLOUDFLARE.COM', 'MARJORY.NS.CLOUDFLARE.COM'],
+#  'status': 'clientTransferProhibited https://icann.org/epp#clientTransferProhibited',
+#  'emails': 'abuse@namecheap.com',
+#  'dnssec': 'unsigned',
+#  'name': None,
+#  'org': None,
+#  'address': None,
+#  'city': None,
+#  'state': None,
+#  'zipcode': None,
+#  'country': None},
+# 'status': 200}
+```
 
 ---
 
